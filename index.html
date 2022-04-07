@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Your first HTML form, styled</title>
+        <link href="mystyles.css" text="text/css" rel="stylesheet">
+        <script src="myscript.js"></script>
+	</head>
+
+    <body>
+        <form 
+            id="Sendrequest"
+            class="card"
+            action="https://60376bfd5435040017722533.mockapi.io/form">
+            <h1>Задать вопрос</h1>
+            <input  
+                type="text"
+                name="name"
+                id="fio" 
+                style="top: 85px"
+                placeholder="Фамилия Имя Отчество *"
+                pattern="^[А-Яа-яЁё\s\+-]+$"
+                required/>
+            <input  
+                type="text" 
+                name="phone"
+                id="phone" 
+                style="top: 158px" 
+                placeholder="Телефон *"
+                pattern="^[0-9\+-]+$"
+                required/>
+            <input  
+                id="email" 
+                name="email"
+                type="email" 
+                style="top: 231px" 
+                placeholder="Email"/>
+            <input 
+                type="submit"
+                name="send"
+                value="ОТПРАВИТЬ ЗАПРОС"
+                class="button"/>
+        </form>    
+
+        <script>
+            // Attach a submit handler to the form
+            $( "#Sendrequest" ).submit(function( event ) {
+             
+                // Stop form from submitting normally
+                event.preventDefault();
+             
+                // Get some values from elements on the page:
+                var $form = $( this ),
+                url = $form.attr( "action" );
+             
+                // Send the data using post
+                var posting = $.post( url, $form.serialize() );
+             
+                // Put the results in a div
+                posting.done(function( data ) {
+                console.log( data); });
+            });
+        </script>
+    </body>
+</html>
